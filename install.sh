@@ -1,9 +1,9 @@
 # install packages
 sudo apt update
-sudo apt install curl bsdextrautils xz-utils vim -y
+sudo apt install stow curl bsdextrautils xz-utils vim -y
 
 # install nix
-sh< (curl -L https://nixos.org/nix/install) --no-daemon
+sh <(curl -L https://nixos.org/nix/install) --no-daemon
 
 # source nix
 . ~/.nix-profile/etc/profile.d/nix.sh
@@ -25,7 +25,6 @@ nix-env -iA \
 	nixpkgs.ghq\
 	nixpkgs.python3Full
 
-curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
 
 # add fish to valid login shells
 command -v fish | sudo tee -a /etc/shells
@@ -39,10 +38,6 @@ cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Co
 
 # Install Node Version Manager(NVM)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-
-# Install Fisher libraries
-fisher install jethrokuan/z
-fisher install IlanCosman/tide
 
 # Install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
