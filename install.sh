@@ -36,15 +36,15 @@ sudo chsh -s $(which fish) $USER
 mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
 
-# Install Node Version Manager(NVM)
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-
 # Install nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 
 # Dotfiles setup with stow
 rm -rf ~/.config/fish/config.fish
 stow fish
+
+# Install fisher
+./fisher.fish
 
 # Install node
 nvm install node
