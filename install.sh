@@ -10,7 +10,6 @@ sh< (curl -L https://nixos.org/nix/install) --no-daemon
 
 # install packages
 nix-env -iA \
-	nixpkgs.git\
 	nixpkgs.tig\
 	nixpkgs.fish\
 	nixpkgs.neovim\
