@@ -20,6 +20,11 @@ packer.startup(function(use)
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-buffer'
   use 'onsails/lspkind.nvim'
+  use 'glepnir/lspsaga.nvim'
+  use 'jose-elias-alvarez/null-ls.nvim'
+  use 'MunifTanjim/prettier.nvim'
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
 
   use {
     'nvim-treesitter/nvim-treesitter',
