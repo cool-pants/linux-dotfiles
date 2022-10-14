@@ -1,24 +1,33 @@
 # install packages
 sudo apt update
-sudo apt install fish git stow bsdextrautils xz-utils vim -y
+sudo apt install unzip git gcc g++ g++-10-powerpc64-linux-gnu make cmake stow bsdextrautils xz-utils vim -y
 
 # install nix
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
 
-# add fish to valid login shells
-command -v fish | sudo tee -a /etc/shells
-
-# use fish as default shell
-sudo chsh -s $(which fish) $USER
-
-# stow fish config
-rm -rf ~/.config/fish/config.fish
-stow fish
+. ~/.nix-profile/etc/profile.d/nix.sh
 
 # install nvim
-wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
-tar xzvf nvim-linux64.tar.gz
-mv nvim-linux64 ./.local/bin/neovim
+{
+  rm -rf ~/.local/bin/neovim
+} || 
+{
+  echo "no neovim"
+}
+distro=$(cat /etc/issue)
+if [[ "$distro" == *"Debian"* ]]; then
+  url=https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.deb
+else
+  url=https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.tar.gz
+fi
+wget $url
+if [[ "$distro" == *"Debian"* ]]; then
+  sudo apt install ./nvim-linux64.deb
+else
+  tar xzvf nvim-linux64.tar.gz
+  mkdir ~/.local/bin
+  mv nvim-linux64 ~/.local/bin/neovim
+fi
 
 # Install fonts
 mkdir -p ~/.local/share/fonts
@@ -31,8 +40,6 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 rm -rf ~/.config/fish/config.fish
 stow fish
 
-# Install fisher
-fish ~/.dotfiles/fisher.fish
 
 # Install packer
 fish ~/.dotfiles/packer.fish
@@ -40,3 +47,5 @@ fish ~/.dotfiles/packer.fish
 # stow nvim config
 rm -rf ~/.config/nvim
 stow nvim
+
+echo "Basic setup finished!! You can now start fish and run fisher.fish"

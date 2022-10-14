@@ -7,6 +7,7 @@ if which tig > /dev/null; and which tmux > /dev/null; and which yarn > /dev/null
 else
   nix-env -iA \
 	nixpkgs.tig\
+	nixpkgs.fish\
 	nixpkgs.tmux\
 	nixpkgs.yarn\
 	nixpkgs.fzf\
@@ -18,6 +19,17 @@ else
 	nixpkgs.ghq\
 	nixpkgs.python3Full
 end
+
+# add fish to valid login shells
+command -v fish | sudo tee -a /etc/shells
+
+# use fish as default shell
+sudo chsh -s $(which fish) $USER
+
+# stow fish config
+rm -rf ~/.config/fish/config.fish
+stow fish
+
 
 # Install fisher
 curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
