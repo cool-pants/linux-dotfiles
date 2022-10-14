@@ -1,36 +1,24 @@
 # install packages
 sudo apt update
-sudo apt install stow curl bsdextrautils xz-utils vim -y
+sudo apt install fish git stow bsdextrautils xz-utils vim -y
 
 # install nix
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
-
-# source nix
-. ~/.nix-profile/etc/profile.d/nix.sh
-
-# install packages
-nix-env -iA \
-	nixpkgs.tig\
-	nixpkgs.fish\
-	nixpkgs.neovim\
-	nixpkgs.tmux\
-	nixpkgs.stow\
-	nixpkgs.yarn\
-	nixpkgs.fzf\
-	nixpkgs.ripgrep\
-	nixpkgs.bat\
-	nixpkgs.direnv\
-	nixpkgs.exa\
-	nixpkgs.peco\
-	nixpkgs.ghq\
-	nixpkgs.python3Full
-
 
 # add fish to valid login shells
 command -v fish | sudo tee -a /etc/shells
 
 # use fish as default shell
 sudo chsh -s $(which fish) $USER
+
+# stow fish config
+rm -rf ~/.config/fish/config.fish
+stow fish
+
+# install nvim
+wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+tar xzvf nvim-linux64.tar.gz
+mv nvim-linux64 ./.local/bin/neovim
 
 # Install fonts
 mkdir -p ~/.local/share/fonts
@@ -44,7 +32,11 @@ rm -rf ~/.config/fish/config.fish
 stow fish
 
 # Install fisher
-./fisher.fish
+fish ~/.dotfiles/fisher.fish
 
-# Install node
-nvm install node
+# Install packer
+fish ~/.dotfiles/packer.fish
+
+# stow nvim config
+rm -rf ~/.config/nvim
+stow nvim

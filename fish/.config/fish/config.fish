@@ -19,6 +19,8 @@ end # added by Nix installer
 
 set fish_greeting ""
 
+set -gx PATH ~/.local/bin/neovim/bin $PATH
+
 set -gx TERM xterm-256color
 
 # theme
@@ -45,15 +47,20 @@ set -gx PATH node_modules/.bin $PATH
 set -g GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
 
-# NVM
+# NVM( check if node is installed, if no then install, if yes then use latest node version or one specified in .nvmrc )
 function __check_rvm --on-variable PWD --description 'Do nvm stuff'
   status --is-command-substitution; and return
-
-  if test -f .nvmrc; and test -r .nvmrc;
-    nvm use
+  if which node > /dev/null
+    if test -f .nvmrc; and test -r .nvmrc;
+      nvm use
+    else
+      nvm use node
+    end
   else
+    nvm install node
   end
 end
+
 
 set LOCAL_CONFIG (dirname (status --current-filename))/config-local.fish
 if test -f $LOCAL_CONFIG
