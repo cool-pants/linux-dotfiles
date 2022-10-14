@@ -23,4 +23,6 @@ install script dotfiles for my linux machine on WSL2
 
 # Install this script on a new machine
 
-`curl -o- https://raw.githubusercontent.com/cool-pants/linux-dotfiles/master/install.sh | bash`
+```shell
+curl -o- https://raw.githubusercontent.com/cool-pants/linux-dotfiles/master/install.sh | bash
+```
