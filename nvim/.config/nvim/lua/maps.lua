@@ -16,7 +16,7 @@ keymap.set('n', '<C-a>', 'gg<S-v>G')
 -- New tab
 keymap.set('n', 'te', ':tabedit')
 -- New split
-keymap.set('n', 'ss', ':split<Return><C-w>w')
+keymap.set('n', 'sr', ':split<Return><C-w>w')
 keymap.set('n', 'ss', ':vsplit<Return><C-w>w')
 
 -- Window/Pane nav

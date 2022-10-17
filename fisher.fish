@@ -8,6 +8,7 @@ else
   nix-env -iA \
 	nixpkgs.tig\
 	nixpkgs.fish\
+	nixpkgs.lua\
 	nixpkgs.tmux\
 	nixpkgs.yarn\
 	nixpkgs.fzf\

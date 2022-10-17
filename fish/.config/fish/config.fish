@@ -30,8 +30,12 @@ set -g theme_display_user yes
 set -g theme_hide_hostname no
 set -g theme_hostname always
 
+set LC_ALL en_IN.UTF-8
+set LANG en_IN.UTF-8
+
 # aliases
 command -qv nvim && alias vim nvim
+alias cls clear
 
 set -gx EDITOR nvim
 
@@ -54,7 +58,6 @@ function __check_rvm --on-variable PWD --description 'Do nvm stuff'
     if test -f .nvmrc; and test -r .nvmrc;
       nvm use
     else
-      nvm use node
     end
   else
     nvm install node

@@ -48,4 +48,9 @@ fish ~/.dotfiles/packer.fish
 rm -rf ~/.config/nvim
 stow nvim
 
+# COnfigure fish
+sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator $(which kitty) 1
+sudo update-alternatives --config x-terminal-emulator
+
+
 echo "Basic setup finished!! You can now start fish and run fisher.fish"
