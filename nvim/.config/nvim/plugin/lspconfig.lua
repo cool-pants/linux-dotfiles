@@ -40,6 +40,20 @@ nvim_lsp.pyright.setup {
   cmd = { "pyright-langserver", "--stdio" }
 }
 
+nvim_lsp.yamlls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  filetypes = { "yaml", "yaml.docker-compose" },
+  cmd = { "yaml-language-server", "--stdio" }
+}
+
+nvim_lsp.dockerls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  filetypes = { "dockerfile" },
+  cmd = { "docker-langserver", "--stdio" }
+}
+
 local luabinRoot = os.getenv('HOME') .. '/.local/bin/lua-language-server/'
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
@@ -48,7 +62,7 @@ table.insert(runtime_path, 'lua/?/init.lua')
 nvim_lsp.sumneko_lua.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  cmd = { luabinRoot..'bin/lua-language-server','-E',luabinRoot .. 'main.lua' },
+  cmd = { 'lua-language-server' },
   settings = {
     Lua = {
       runtime = { version='LuaJIT', path=runtime_path },
