@@ -3,6 +3,9 @@ local keymap = vim.keymap
 -- Do not yank with x
 keymap.set('n', 'x', '"_X')
 
+-- Find and replace
+keymap.set('n','fr', ':s/')
+
 -- Increment/Decrement
 keymap.set('n', '+', '<C-a>')
 keymap.set('n', '-', '<C-x>')
@@ -15,6 +18,7 @@ keymap.set('n', '<C-a>', 'gg<S-v>G')
 
 -- New tab
 keymap.set('n', 'te', ':tabedit')
+
 -- New split
 keymap.set('n', 'sr', ':split<Return><C-w>w')
 keymap.set('n', 'ss', ':vsplit<Return><C-w>w')

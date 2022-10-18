@@ -18,23 +18,29 @@ local formatting = builtin.formatting
 local sources = {}
 
 if vim.fn.executable("djlint") == 1 then
-  sources[#sources + 1] = formatting.djlint.with({
+  sources[#sources + 1] = builtin.diagnostics.djlint.with({
     command = "djlint",
-    args = { "--reformat", "-" },
+    args = { "$FILENAME" },
+    filetypes= { "django", "jinja.html", "htmldjango", "html", "django-html" },
+  })
+  sources[#sources + 1] = builtin.formatting.djlint.with({
+    command = "djlint",
+    args = { "$FILENAME", "-reformat" },
+    filetypes= { "django", "jinja.html", "htmldjango", "html", "django-html" },
   })
 end
 
 if vim.fn.executable("black") == 1 then
   sources[#sources + 1] = formatting.black.with({
     command = "black",
-    args = { "--quiet", "--fast", "-" },
+    args = { "--quiet", "--fast", "-", "$FILENAME"},
   })
 end
 
 if vim.fn.executable("yamlfmt") == 1 then
   sources[#sources + 1] = formatting.yamlfmt.with({
     command = "yamlfmt",
-    args = { "-" },
+    args = { "$FILENAME" },
   })
 end
 

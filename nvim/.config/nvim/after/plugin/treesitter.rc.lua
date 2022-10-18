@@ -22,7 +22,8 @@ ts.setup {
     'html',
     'javascript',
     'vim',
-    'typescript'
+    'typescript',
+    'go',
   },
   autotag = {
     enable = true,

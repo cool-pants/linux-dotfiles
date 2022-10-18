@@ -36,6 +36,8 @@ set LANG en_IN.UTF-8
 # aliases
 command -qv nvim && alias vim nvim
 alias cls clear
+alias kts "tmux kill-session -t"
+alias sp "source env/bin/activate.fish"
 
 set -gx EDITOR nvim
 
@@ -63,7 +65,6 @@ function __check_rvm --on-variable PWD --description 'Do nvm stuff'
     nvm install node
   end
 end
-
 
 set LOCAL_CONFIG (dirname (status --current-filename))/config-local.fish
 if test -f $LOCAL_CONFIG
