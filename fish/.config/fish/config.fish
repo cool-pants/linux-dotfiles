@@ -20,6 +20,7 @@ end # added by Nix installer
 set fish_greeting ""
 
 set -gx PATH ~/.local/bin/neovim/bin $PATH
+set -gx PATH ~/pycharm-2022.2.3/bin $PATH
 
 set -gx TERM xterm-256color
 
@@ -62,7 +63,6 @@ function __check_rvm --on-variable PWD --description 'Do nvm stuff'
     else
     end
   else
-    nvm install node
   end
 end
 

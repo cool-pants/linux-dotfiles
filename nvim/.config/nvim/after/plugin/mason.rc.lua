@@ -7,7 +7,7 @@ mason.setup({})
 
 lspconfig.setup {
   automatic_installation = true,
-  ensure_installed = { 'sumneko_lua','tailwindcss','tsserver','pyright', 'dockerfile-language-server' }
+  ensure_installed = { 'sumneko_lua','tailwindcss','tsserver','pyright', 'dockerls' }
 }
 
 

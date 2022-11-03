@@ -10,7 +10,7 @@ if (not s) then
   return
 end
 
-local capabilities = cmp_lsp.update_capabilities(
+local capabilities = cmp_lsp.default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
@@ -54,7 +54,6 @@ nvim_lsp.dockerls.setup {
   cmd = { "docker-langserver", "--stdio" }
 }
 
-local luabinRoot = os.getenv('HOME') .. '/.local/bin/lua-language-server/'
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
