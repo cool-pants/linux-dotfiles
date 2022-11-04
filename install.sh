@@ -1,7 +1,8 @@
 # install packages
 sudo apt update
 sudo apt install unzip git gcc g++ g++-10-powerpc64-linux-gnu make cmake stow bsdextrautils xz-utils vim -y
-sudo apt install python3-pip python3-testresources
+sudo apt install python3-pip python3-testresources -y
+sudo apt install mysql-server -y
 
 # install nix
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
