@@ -1,0 +1,7 @@
+conky.config = {
+
+};
+
+conky.text = [[
+  ${image ./LinuxMedium.png -p 10,0}
+]];

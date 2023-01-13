@@ -47,6 +47,23 @@ nvim_lsp.yamlls.setup {
   cmd = { "yaml-language-server", "--stdio" }
 }
 
+nvim_lsp.gopls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  filetypes = { "go", "gomod", "gowork", "gotmpl" },
+  cmd = { "gopls"},
+  single_file_support = true
+}
+
+nvim_lsp.rust_analyzer.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  filetypes = {"rust","rs"},
+  settings = {
+    ["rust-analyzer"] ={}
+  }
+}
+
 nvim_lsp.dockerls.setup {
   capabilities = capabilities,
   on_attach = on_attach,

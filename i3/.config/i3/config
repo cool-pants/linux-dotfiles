@@ -1,0 +1,243 @@
+# set modifier
+set $super Mod4
+set $mod Mod4
+set $alt Mod1
+
+# set font
+font pango: Noto Sans 8
+
+# Use Mouse+$super to drag floating windows
+floating_modifier $super
+
+# autostart
+exec --no-startup-id hsetroot -center ~/.config/i3/wallpaper.png
+exec --no-startup-id xsettingsd &
+exec --no-startup-id compton -b
+
+# Configure border style
+default_border pixel 1
+default_floating_border normal
+
+# hide borders
+hide_edge_borders none
+
+# start terminal
+bindsym $super+Return exec i3-sensible-terminal
+
+# start dmenu (a program launcher)
+bindsym $super+Shift+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"
+bindsym $super+d exec rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 8'
+
+# common apps keybinds
+bindsym $super+Delete exec i3lock-fancy -p
+bindsym $super+Shift+b exec brave-browser
+bindsym $super+Shift+s exec spotify
+bindsym $super+Shift+n exec notion-snap
+bindsym $super+Shift+o exec ~/.dotfiles/obsidian.AppImage
+bindsym $super+Shift+t exec teams
+bindsym $super+Shift+f exec thunar;workspace 3;focus
+
+# kill focused windows
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $super+Left focus left
+bindsym $super+Right focus right
+bindsym $super+Up focus up
+bindsym $super+Down focus down
+
+# Move focused windows
+bindsym $super+Shift+Left move left
+bindsym $super+Shift+Right move right
+bindsym $super+Shift+Up move up
+bindsym $super+Shift+Down move down
+
+# workspace back and forth (with/without active container)
+workspace_auto_back_and_forth yes
+bindsym $mod+b workspace back_and_forth
+
+# split orientation toggle
+bindsym $super+q split toggle
+
+# enter fullscreen
+bindsym $super+f fullscreen toggle
+
+# change container layout split
+bindsym $super+s layout toggle split
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# reload the configuration file
+bindsym $super+Shift+c reload
+
+# toggle tiling and floating
+bindsym $super+Shift+space floating toggle
+
+# toggle music
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+
+# sound/volume
+bindsym XF86AudioLowerVolume exec amixer -c 1 sset Master 5-
+bindsym XF86AudioRaiseVolume exec amixer -c 1 sset Master 5+
+
+# brightness adjust
+bindsym XF86MonBrightnessUp exec light -A 20
+bindsym XF86MonBrightnessDown exec light -U 20
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+default_border pixel 0
+# gaps inner all set 20
+
+# Set shut down, restart and locking features
+bindsym $mod+0 mode "$mode_system"
+set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id exec i3lock -i ~/.config/wallpaper1.jpg, mode "default"
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym u exec --no-startup-id i3-msg exit, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym h exec --no-startup-id sudo pm-hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
+
+    # exit system mode: "Enter" or "Escape"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+# Resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 5 px or 5 ppt
+        bindsym k resize grow height 5 px or 5 ppt
+        bindsym l resize shrink height 5 px or 5 ppt
+        bindsym semicolon resize grow width 5 px or 5 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # exit resize mode: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# panel
+bar {
+  font pango:DejaVu Sans Mono 9
+        tray_output primary
+        position top
+        # font pango:Terminus 8
+        colors {
+            # background #202020
+            separator #202020
+            # statusline #88ABC4
+            # focused_workspace  #AAAAAA #000000 #DDDDDD
+            # active_workspace   #000000 #808080 #336633
+            # inactive_workspace #606060 #808080 #000000
+            # urgent_workspace   #AAAAAA #e60000 #ffffff
+        }
+  # status_command i3status -c ~/.config/i3status/config
+  #status_command ~/.config/i3status/bin/conky-i3bar
+  status_command ~/.config/i3status.sh
+}
+
+# window rules, you can find the window class using xprop
+for_window [class=".*"] border pixel 4
+assign [class=URxvt] 1
+#assign [class=Firefox|Transmission-gtk] 2
+assign [class=Thunar|File-roller] 3
+assign [class=Geany|Evince|Gucharmap|Soffice|libreoffice*] 4
+assign [class=Audacity|Vlc|mpv|Ghb|Xfburn|Gimp*|Inkscape] 5
+assign [class=Lxappearance|System-config-printer.py|Lxtask|GParted|Pavucontrol|Exo-helper*|Lxrandr|Arandr] 6
+for_window [class=Viewnior|feh|Audacious|File-roller|Lxappearance|Lxtask|Pavucontrol] floating enable
+for_window [class=URxvt|Firefox|Geany|Evince|Soffice|libreoffice*|mpv|Ghb|Xfburn|Gimp*|Inkscape|Vlc|Lxappearance|Audacity] focus
+for_window [class=Xfburn|GParted|System-config-printer.py|Lxtask|Pavucontrol|Exo-helper*|Lxrandr|Arandr] focus
+
+# colour of border, background, text, indicator, and child_border
+client.focused              #bf616a #2f343f #d8dee8 #bf616a #d8dee8
+client.focused_inactive     #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.unfocused            #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.urgent               #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.placeholder          #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.background           #2f343f
+
+#############################################################################
+
+# hide/unhide i3status bar
+bindsym $mod+m bar mode toggle
+
+############ff17#####################
+exec xmodmap -e "keysym Menu=Super_R"
+exec_always  --no-startup-id setxkbmap -option grp:switch,grp:caps_toggle,grp_led:caps us,ir
+exec_always  --no-startup-id xset b off 
+
+exec --no-startup-id ~/.config/i3status/bin/bar
+
+
+bindsym Print       exec --no-startup-id flameshot full -c -p ~/Pictures
+bindsym Shift+Print exec --no-startup-id flameshot gui     -p ~/Picture
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+# navigate workspaces next / previous
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+set $ws9 9
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+
+# Move focused container to workspace
+bindsym $mod+Ctrl+1 move container to workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
+bindsym $mod+Ctrl+9 move container to workspace $ws9
+
+# Move to workspace with focused container
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $super+Shift+r restart
+

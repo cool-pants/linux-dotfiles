@@ -4,6 +4,9 @@ sudo apt install unzip git gcc g++ g++-10-powerpc64-linux-gnu make cmake stow bs
 sudo apt install python3-pip python3-testresources -y
 sudo apt install mysql-server -y
 
+# for wm
+sudo apt install xbacklight xinput i3blocks rxvt-unicode-256color screen feh scrot redshift alsa-utils acpi fonts-font-awesome xdotool xclip -y
+
 # install nix
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
 

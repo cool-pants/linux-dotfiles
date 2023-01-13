@@ -14,7 +14,7 @@ local is_linux = has "unix"
 if is_mac then
   require('unix')
 end
-if is_mac then
+if is_win then
   require('windows')
 end
 if is_linux then

@@ -20,7 +20,7 @@ end # added by Nix installer
 set fish_greeting ""
 
 set -gx PATH ~/.local/bin/neovim/bin $PATH
-set -gx PATH ~/pycharm-2022.2.3/bin $PATH
+set -gx PATH ~/pycharm/bin $PATH
 
 set -gx TERM xterm-256color
 
@@ -39,6 +39,7 @@ command -qv nvim && alias vim nvim
 alias cls clear
 alias kts "tmux kill-session -t"
 alias sp "source env/bin/activate.fish"
+alias postman "/home/coolpants/Postman/Postman"
 
 set -gx EDITOR nvim
 
@@ -50,9 +51,13 @@ set -gx PATH ~/.local/bin $PATH
 # NodeJS
 set -gx PATH node_modules/.bin $PATH
 
-#Go
+# Go
 set -g GOPATH $HOME/go
 set -gx PATH $GOPATH/bin $PATH
+set -gx GO111MODULE on
+
+# Rust
+set -gx PATH $HOME/.cargo/bin $PATH
 
 # NVM( check if node is installed, if no then install, if yes then use latest node version or one specified in .nvmrc )
 function __check_rvm --on-variable PWD --description 'Do nvm stuff'

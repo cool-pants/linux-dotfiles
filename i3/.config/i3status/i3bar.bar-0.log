@@ -1,0 +1,6 @@
+[libi3] ERROR: Could not parse color: i
+i3status: trying to auto-detect output_format setting
+i3status: auto-detection: parent process is "sh", looking at its parent
+i3status: auto-detected "i3bar"
+[libi3] ../libi3/font.c Using Pango font Source Sans Pro,icomoon, size 8
+i3status: exiting due to signal.
